@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests  
+import requests
 from requests.exceptions import HTTPError
 from requests.exceptions import ConnectionError
 import urllib.request
@@ -18,8 +18,8 @@ import pickle
 logging.basicConfig(level=logging.DEBUG)
 
 
-JSON_PATH="dict2vec/data/synonyms.json"
-WORDS_PATH="dict2vec/data/wordlist.txt"
+JSON_PATH="/home/jer/Desktop/synonyms.json"
+WORDS_PATH="/home/jer/Desktop/wordlist.txt"
 URL = "https://www.mijnwoordenboek.nl/synoniemen/"
 DEF_DICT = defaultdict(set)
 SYN_DICT = defaultdict(set)
@@ -53,7 +53,7 @@ async def extract_synonyms_definitions(response, word):
             definitions = extract_definitions(puzzel_split)
 
             return synonyms, definitions
-
+    FAILED_WORDS.append(word)
     return [],[]
 
 async def download_word(word, session):
@@ -70,7 +70,7 @@ async def download_word(word, session):
         print("UnicodeDecodeError: ", word)
     except Exception as e:
         print("Exception in download_word:", e, word)
-        FAILED_WORDS << word
+        FAILED_WORDS.append(word)
         return None
 
 
@@ -94,9 +94,36 @@ async def run_program(line, session, sem):
 
         pass
 
+async def redo_failed():
+    conn = aiohttp.TCPConnector(limit=0)
+
+    with open("failed_words.p", "rb") as failed:
+        failed_words = pickle.load(failed)
+
+    with open("synonyms.p", "rb") as synonyms:
+        SYN_DICT = pickle.load(synonyms)
+
+    with open("definitions.p", "rb") as definitions:
+        DEF_DICT = pickle.load(definitions)
+
+    headers={'Connection': 'keep-alive', 'Transfer-Encoding': 'chunked'}
+    sem = asyncio.Semaphore(20)
+
+    async with ClientSession(headers=headers, connector=conn) as session:
+        await asyncio.gather(*[run_program(word, session, sem) for word in failed_words])
+
+    with open('failed_words2.p', 'wb') as ffw:
+        pickle.dump(FAILED_WORDS, ffw, protocol=pickle.HIGHEST_PROTOCOL)
+
+    with open('synonyms2.p', 'wb') as fs:
+        pickle.dump(SYN_DICT, fs, protocol=pickle.HIGHEST_PROTOCOL)
+
+    with open('definitions2.p', 'wb') as fd:
+        pickle.dump(DEF_DICT, fd, protocol=pickle.HIGHEST_PROTOCOL)
+
 async def main():
     conn = aiohttp.TCPConnector(limit=0)
-    words_file = open(WORDS_PATH, 'r') 
+    words_file = open(WORDS_PATH, 'r')
     lines = words_file.readlines()
     headers={'Connection': 'keep-alive', 'Transfer-Encoding': 'chunked'}
     sem = asyncio.Semaphore(50)
