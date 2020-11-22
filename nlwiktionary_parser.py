@@ -6,15 +6,18 @@ import pickle
 from collections import defaultdict
 
 x=0
-events = pulldom.parse('nlwiki-latest-pages-articles.xml')
 
+NLWIKI_FILE = 'nlwiki-latest-pages-articles.xml'
 sep_list = ["is een", "is de", "was een", "was de", "waren een", "waren de", "zijn een", "zijn de"]
 def_dict = defaultdict(set)
 bad_list = [":", "/"]
+
 def custom_split(sepr_list, str_to_split):
     # create regular expression dynamically
     regular_exp = '|'.join(map(re.escape, sepr_list))
     return re.split(regular_exp, str_to_split)
+
+events = pulldom.parse(NLWIKI_FILE)
 
 for event, node in events:
     if event == 'START_ELEMENT' and node.tagName=='page':
@@ -53,5 +56,5 @@ for event, node in events:
         if x % 1000 == 0:
             print("%d: %s" % (x, title))
         
-with open('wiktionary_definitions.p', 'wb') as f:
+with open('data/wiktionary_definitions.p', 'wb') as f:
     pickle.dump(def_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
