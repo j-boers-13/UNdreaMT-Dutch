@@ -5,9 +5,9 @@ import sys
 WABLIEFT_PATH="data/wablieft-sents.txt"
 OUTPUT_PATH="data/wablieft-sents-cleaned.txt"
 
-output_file = open(OUTPUT_PATH, 'a') 
-
 def main():
+    output_file = open(OUTPUT_PATH, 'a') 
+
     # print command line arguments
     if len(sys.argv) > 1:
         with open(sys.argv[1]) as f:

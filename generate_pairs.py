@@ -1,0 +1,1 @@
+JSON_PATH="/home/jer/Desktop/synonyms.json"

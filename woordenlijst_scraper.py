@@ -18,7 +18,6 @@ import pickle
 logging.basicConfig(level=logging.DEBUG)
 
 
-JSON_PATH="/home/jer/Desktop/synonyms.json"
 WORDS_PATH="/home/jer/Desktop/wordlist.txt"
 URL = "https://www.mijnwoordenboek.nl/synoniemen/"
 DEF_DICT = defaultdict(set)
@@ -139,6 +138,8 @@ async def main():
 
     with open('definitions.p', 'wb') as fd:
         pickle.dump(DEF_DICT, fd, protocol=pickle.HIGHEST_PROTOCOL)
+
+    redo_failed()
 
 if __name__ == '__main__':
     asyncio.run(main())
