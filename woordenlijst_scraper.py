@@ -36,6 +36,7 @@ def extract_words(html_str):
     soup = BeautifulSoup(html_str, 'html.parser')
     word_elems = soup.findAll('a')
     words = [el.get_text().lower() for el in word_elems]
+    words = [re.sub("[\(].*?[\)]", "", x) for x in word_elems]
     return words
 
 async def extract_synonyms_definitions(response, word):

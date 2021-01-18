@@ -1,0 +1,12 @@
+[submodule "word2vec"]
+	path = word2vec
+	url = https://github.com/tmikolov/word2vec
+[submodule "vecmap"]
+	path = vecmap
+	url = https://github.com/artetxem/vecmap
+[submodule "UnsupNTS"]
+	path = UnsupNTS
+	url = https://github.com/subramanyamdvss/UnsupNTS
+[submodule "dict2vec"]
+	path = dict2vec
+	url = https://github.com/tca19/dict2vec
