@@ -1,0 +1,7 @@
+edit distance between gen_lower.translation.dict2vec.50K.undreamt.final.src2trg.pth.noredund and src-file.txt is: 0.5336
+edit distance between gen_lower.translation.dict2vec.50K.undreamt.final.src2trg.pth.noredund and src-file.txt is: 0.5336
+edit distance between gen_lower.translation.dict2vec.100K.undreamt.final.src2trg.pth.noredund and src-file.txt is: 0.6280
+edit distance between gen_lower.translation.dict2vec.all.undreamt.final.src2trg.pth.noredund and src-file.txt is: 0.7747
+edit distance between gen_lower.translation.word2vec.default.cbow.final.src2trg.pth.noredund and src-file.txt is: 0.5536
+edit distance between gen_lower.translation.word2vec.undreamt.cbow.final.src2trg.pth.noredund and src-file.txt is: 0.3962
+edit distance between gen_lower.translation.word2vec.undreamt.skipgram.final.src2trg.pth.noredund and src-file.txt is: 0.4508

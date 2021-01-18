@@ -1,0 +1,6 @@
+(fkdiff,ts,ds) between gen_lower.translation.dict2vec.50K.undreamt.final.src2trg.pth.noredund and src-file.txt are: 18.7791 0.6763 0.8293
+(fkdiff,ts,ds) between gen_lower.translation.dict2vec.100K.undreamt.final.src2trg.pth.noredund and src-file.txt are: 16.9835 0.7047 0.8722
+(fkdiff,ts,ds) between gen_lower.translation.dict2vec.all.undreamt.final.src2trg.pth.noredund and src-file.txt are: 10.5499 0.7785 0.9275
+(fkdiff,ts,ds) between gen_lower.translation.word2vec.default.cbow.final.src2trg.pth.noredund and src-file.txt are: 14.8579 0.6572 0.8240
+(fkdiff,ts,ds) between gen_lower.translation.word2vec.undreamt.cbow.final.src2trg.pth.noredund and src-file.txt are: 13.8514 0.5700 0.7204
+(fkdiff,ts,ds) between gen_lower.translation.word2vec.undreamt.skipgram.final.src2trg.pth.noredund and src-file.txt are: 14.4490 0.6091 0.7351
